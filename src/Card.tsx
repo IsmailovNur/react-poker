@@ -5,7 +5,6 @@ interface CardProps {
   suit: string;
 }
 
-
 const Card: FC<CardProps> = ({rank, suit}) => {
 
   const cardSuits: { [key: string]: string } = {
