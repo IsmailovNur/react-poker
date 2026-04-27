@@ -9,11 +9,15 @@
 
 /* card itself
 ********************************************************************/
-
+.playingCards{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
 .playingCards .card {
   display: inline-block;
-  width: 3.3em;
-  height: 4.6em;
+  width: 4.3em;
+  height: 5.3em;
   border: 1px solid #666;
   border-radius: .3em;
   -moz-border-radius: .3em;

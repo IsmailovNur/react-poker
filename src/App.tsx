@@ -1,27 +1,35 @@
 import './App.css';
 import Card from './lib/Card.ts';
-import CardEl from "./Card.tsx";
-import CardDeck from "./lib/CardDeck.ts";
-import {useState} from "react";
+import CardEl from './Card.tsx';
+import CardDeck from './lib/CardDeck.ts';
+import {useState} from 'react';
+import PokerHand from './lib/PokerHand.ts';
 
 function App() {
   const [hand, setHand] = useState<Card[]>([]);
+  const [combination, setCombination] = useState<string>('');
 
   const dealCards = () => {
     const deck = new CardDeck();
-    const newCards = deck.getCards();
-    setHand(newCards);
+    const cards = deck.getCards();
+    setHand(cards);
+    const pokerHand = new PokerHand(cards);
+    setCombination(pokerHand.getOutcome());
   };
 
   if (hand.length === 0) {
-    return (<button onClick={dealCards} style={{marginBottom: '20px'}}>
-      Раздать карты
-    </button>);
+    return (
+      <div className='app'>
+        <button onClick={dealCards} className='app-btn'>
+          Раздать карты
+        </button>
+      </div>
+    );
   }
 
   return (
-    <div className="App">
-      <div className="playingCards faceImages">
+    <div className='app'>
+      <div className='playingCards faceImages'>
         {hand.map((card, i) => (
           <CardEl
             key={i}
@@ -30,8 +38,15 @@ function App() {
           />
         ))}
       </div>
+
+      <div className='result'>
+        <h1 className='hand-combination'>{combination}</h1>
+        <button onClick={dealCards} className='app-btn'>
+         Еще раз раздать карты
+        </button>
+      </div>
     </div>
   );
 }
 
-export default App
+export default App;
